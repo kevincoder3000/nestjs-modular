@@ -8,17 +8,22 @@ import {
   Delete,
   HttpStatus,
   HttpCode,
-  // ParseIntPipe,
+  Inject,
 } from '@nestjs/common';
-import { ParseIntPipe } from '../common/parse-int.pipe';
-import { CreateProductDto, UpdateProductDto } from './../dtos/products.dtos';
+import { ParseIntPipe } from '../../common/parse-int.pipe';
+import { CreateProductDto, UpdateProductDto } from '../dtos/product.dtos';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ProductsService } from '../services/products.service';
 
-import { ProductsService } from './../services/products.service';
-
+@ApiTags('Products')
 @Controller('products')
 export class ProductsController {
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    @Inject('API KEY') private apiKey: string,
+  ) {}
 
+  @ApiOperation({ summary: 'List of products' })
   @Get()
   getProducts() {
     return this.productsService.findAll();
@@ -29,9 +34,9 @@ export class ProductsController {
     return `yo soy un filter`;
   }
 
-  @Get(':productId')
+  @Get(':id')
   @HttpCode(HttpStatus.ACCEPTED)
-  getOne(@Param('productId', ParseIntPipe) productId: number) {
+  getOne(@Param('id', ParseIntPipe) productId: number) {
     // response.status(200).send({
     //   message: `product ${productId}`,
     // });

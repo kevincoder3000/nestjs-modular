@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { Product } from './../entities/product.entity';
-import { CreateProductDto, UpdateProductDto } from './../dtos/products.dtos';
+import { Product } from '../entities/product.entity';
+import { CreateProductDto, UpdateProductDto } from '../dtos/product.dtos';
 
 @Injectable()
 export class ProductsService {
@@ -9,11 +9,30 @@ export class ProductsService {
   private products: Product[] = [
     {
       id: 1,
-      name: 'Product 1',
-      description: 'bla bla',
-      price: 122,
-      image: '',
+      name: 'Sparkies',
+      description: 'Dulce y muy provocativo',
+      price: 8,
+      image: 'https://sparkies-caramelos-masticables.com',
       stock: 12,
+    },
+
+    {
+      id: 2,
+      name: 'Vodka',
+      description: 'Transparente, potente y adictivo',
+      price: 129,
+      image: 'https://vodka.com',
+      stock: 55,
+    },
+
+    {
+      id: 3,
+      name: 'Patek Philippe Grandmaster Chime Ref. 6300A-010',
+      description:
+        'Dispositivo para medir el tiempo, compuesto de agujas o dígitos que indican horas y minutos.',
+      price: 872,
+      image: 'https://reloj-mas-caro.com',
+      stock: 55,
     },
   ];
 
